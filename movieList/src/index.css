@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body,
+html{
+  font-family:'Poppins',sans-serif;
+  font-weight:400;
+}
+.flex-colo{
+  @apply flex flex-col justify-center items-center;
+
+}
+.flex-row{
+  @apply flex flex-row justify-center items-center;
+}
+.flex-btn{
+  @apply flex flex-row justify-between items-center;
+}
+.trasitions{
+  @apply transition duration-300 ease-in;
+}
+zIndex{
+  z-index:10000
+}
+.hoveres{
+  @apply hidden
+}
