@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Movies from './Movies'
 import { AllMovies } from './allMovies'
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function MoviesList() {
     const [movies, setMovies] = React.useState([])
+    const [loading,setLoading] = React.useState(true)
     const maxPage=1;
     const[page,setPage]=useState(maxPage)
     const HandleLoadingMore=()=>{
         if(page*9>=movies.length){
             setPage(1)
+            setLoading(false)
             return
         }
         setPage(page+maxPage)
+        setLoading(false)
     }
 
 
@@ -21,6 +25,7 @@ function MoviesList() {
             const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=371aafbf`)
             const jsonData = await data.json()
             setMovies([jsonData, ...AllMovies]);
+            setLoading(false)
             //added few movies because api conations only one movie object
             console.log(jsonData)
         }
@@ -28,6 +33,8 @@ function MoviesList() {
     }, [])
     
     return (
+        <>
+       { loading && <AiOutlineLoading3Quarters  className='w-10 h-10 animate-spin ' />}
         <div className='my-16'>
             <p className='text-lg font-medium my-6'>
                 Total <span className='font-bold text-red-600 '>{movies?.length}</span> Items Found
@@ -48,6 +55,7 @@ function MoviesList() {
 
             </div>
         </div>
+        </>
     )
 }
 
