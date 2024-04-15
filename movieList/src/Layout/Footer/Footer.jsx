@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
 function Footer() {
+
     const Links=[
         {
             title:'Company',
@@ -76,6 +78,7 @@ function Footer() {
                      </ul>
                  </div>
                 ))}
+                
                 <div className='pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg :col-span-3'>
                     <Link to="/">
                         <img src='/watchlist.png' alt='watchlist' className='w-2/4 object-contain h-12'/>
