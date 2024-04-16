@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FaSearch,FaHeart } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
+import { movieContext } from '../../Components/MovieContexApi';
 
 function NavaBar() {
-    const ActiveCheck=({isActive})=>(isActive?'text-red-600':'hover:text-red-600 transition duration-300 ease-in')
+    const {setSearchMovies,searchMovies}=movieContext()
+
+    const handleSearchInputChange = (event) => {
+        setSearchMovies(event.target.value);
+    };
+    const ActiveCheck=({isActive})=>(isActive?'text-red-600':'text-white hover:text-red-600 transition duration-300 ease-in')
   return (
     <>
     <div className='bg-slate-950 shadow-md sticky top-0 z-20'>
@@ -21,7 +27,8 @@ function NavaBar() {
                     <button type="submit" className='bg-red-800 w-12 flex-col h-12 rounded text-white flex justify-center items-center'>
                     <FaSearch />
                  </button> 
-                 <input type='text' placeholder='Search Movie Name from here' className='font-medium placeholder:text-border outline-none text-sm w-11/12 h-12 bg-transparent border-none px-2 text-black'/>
+                 <input type='text' placeholder='Search Movie Name from here' className='font-medium placeholder:text-border outline-none text-sm w-11/12 h-12 bg-transparent border-none px-2 text-black' value={searchMovies}
+                  onChange={handleSearchInputChange}/>
                 </form>
             </div>
             <div className='col-span-3 gap-14 font-medium text-sm hidden xl:gap-14 2xl:gap-20 flex justify-end lg:flex justify-end xl:flex justify-end items-center'>
