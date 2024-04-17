@@ -7,8 +7,11 @@ import Login from './Screens/Dashboard/Admin/Login';
 import WatchMovie from './Screens/Dashboard/WatchMovie';
 import Movies from './Components/Movies';
 import WatchListPage from './Screens/Dashboard/Admin/WatchListPage';
+import { movieContext } from './Components/MovieContexApi';
 
 function App() {
+  const{userLoggedIn}=movieContext()
+  const userEmail = localStorage.getItem('loggedInUser');
 
   return (
     <Router> 
@@ -18,9 +21,11 @@ function App() {
           <Route path="/movies" element={<HomeScreen />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/watchList" element={<WatchListPage />} />
-          <Route path="*" element={<NotFound />} />
+          ({userEmail&&
+          <Route path="/watchList" element={<WatchListPage/> }/>})
+          <Route path="*" element={<HomeScreen />} />
           <Route path="/movie/:id" element={<WatchMovie />} />
+          <Route path="/watchList/movie/:id" element={<WatchMovie />} />
           <Route path="/movies/movie/:id" element={<WatchMovie />} />
         </Routes> 
       </div>

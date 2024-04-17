@@ -23,42 +23,19 @@ function Footer() {
             links:[
                 {
                     name:'Action',
-                    link:'#'
+                    link:'/action'
                 },
                 {
                     name:'Romantic',
-                    link:'#'
+                    link:'/romantic'
                 },
                 {
                     name:'Drama',
-                    link:'#'
-                },
-                {
-                    name:'Historical',
-                    link:'#'
+                    link:'/drama'
                 },
 
             ]
         },
-        {
-            title:'My Account',
-            links:[
-                {
-                    name:'Dashboard',
-                    link:'/dashboard'
-                },
-                {
-                    name:'WatchList',
-                    link:'/watchList'
-                },
-                {
-                    name:'Profile',
-                    link:'/profile'
-                },
-
-
-            ]
-        }
     ]
   return (
     <div className='bg-dry py-4 bprder=t-2 border-black'>
@@ -81,9 +58,9 @@ function Footer() {
                 
                 <div className='pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg :col-span-3'>
                     <Link to="/">
-                        <img src='/watchlist.png' alt='watchlist' className='w-2/4 object-contain h-12'/>
+                        <img src='./watchlist.png' alt='watchlist' className='w-2/4 object-contain h-12'/>
                     </Link>
-                    <p className=' text-gray-600 leading-7 text-sm text-border mt-3'>
+                    <p className=' text-gray-600 leading-7 text-sm text-border mt-3 whitespace-nowrap'>
                         You can go out in a good movie and look bad aswell
                     </p>
 

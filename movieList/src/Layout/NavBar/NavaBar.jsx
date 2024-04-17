@@ -1,16 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { FaSearch,FaHeart } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import { movieContext } from '../../Components/MovieContexApi';
 
 function NavaBar() {
-    const {setSearchMovies,searchMovies}=movieContext()
+    const {setSearchMovies,searchMovies,userLoggedIn}=movieContext()
+    const [userEmail, setUserEmail] = useState('');
+    useEffect(() => {
+        const userData = localStorage.getItem('loggedInUser');
+        if (userData) {
+          setUserEmail(userData);
+        }
+      }, []);
+    
 
     const handleSearchInputChange = (event) => {
         setSearchMovies(event.target.value);
     };
-    const ActiveCheck=({isActive})=>(isActive?'text-red-600':'text-white hover:text-red-600 transition duration-300 ease-in')
+    const ActiveCheck=({isActive})=>(isActive?'text-red-600 flex items:center gap-2':'text-white hover:text-red-600 transition duration-300 ease-in flex items:center gap-2')
   return (
     <>
     <div className='bg-slate-950 shadow-md sticky top-0 z-20'>
@@ -35,11 +43,12 @@ function NavaBar() {
                 <NavLink to="/movies" className={ActiveCheck}>
                     Movies
                 </NavLink>
+                {userEmail&&
                 <NavLink to="/watchList" className={ActiveCheck}>
                     WatchList
-                </NavLink>
+                </NavLink>}
                 <NavLink to="/login" className={ActiveCheck}>
-               < CiUser className='w-6 h-6'/>
+               < CiUser className='w-6 h-6'/> {userEmail&&userEmail}
                 </NavLink>
             </div>
         </div>
