@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { AllMovies } from './allMovies';
-
+import {apikey} from '../../apiKey'
 const movieCon = createContext();
 
 function MovieContexApi({ children }) {
-    const apiKey = process.env.REACT_APP_API_KEY;  // Accessing environment variable correctly
+    // const apiKey = process.env.REACT_APP_API_KEY;  // Accessing environment variable correctly
     const [searchMovies, setSearchMovies] = useState('');
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -25,13 +25,13 @@ function MovieContexApi({ children }) {
 
     useEffect(() => {
         async function moviesList() {
-            const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${apiKey}`);
+            const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${apikey}`);
             const jsonData = await data.json();
             setMovies([...AllMovies, jsonData]);
             setLoading(false);
         }
         moviesList();
-    }, [apiKey]);
+    }, []);
 
     const filteredMovies = searchMovies
         ? movies.filter(movie => {
