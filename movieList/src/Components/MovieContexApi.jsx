@@ -1,65 +1,74 @@
-import React, { createContext } from 'react'
-import { useContext,useState,useEffect  } from 'react'
-import { AllMovies } from './allMovies'
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { AllMovies } from './allMovies';
 
+const movieCon = createContext();
 
-const movieCon=createContext();
+function MovieContexApi({ children }) {
+    const apiKey = process.env.REACT_APP_API_KEY;  // Accessing environment variable correctly
+    const [searchMovies, setSearchMovies] = useState('');
+    const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [watchListMovies, setWatchListMovies] = useState([]);
+    const [userLoggedIn, setUserLoggedIn] = useState(false);
+    const maxPage = 1;
+    const [page, setPage] = useState(maxPage);
 
-function MovieContexApi({children}) {
-    const [searchMovies,setSearchMovies]=useState('')
-    const [movies, setMovies] = useState([])
-    const [loading,setLoading] = useState(true)
-    const [watchListMovies,setWatchListMovies] = useState([])
-    const [userLoggedIn,setUserLoggedIn] = useState(false)
-    // const [userEmail, setUserEmail] = useState('');
-    // // useEffect(() => {
-    // //     const userData = localStorage.getItem('loggedInUser');
-    // //     if (userData) {
-    // //       setUserEmail(userData);
-    // //     }
-    // //   }, []);
-    const maxPage=1;
-    const[page,setPage]=useState(maxPage)
-    const HandleLoadingMore=()=>{
-        if(page*9>=movies.length){
-            setPage(1)
-            setLoading(false)
-            return
+    const HandleLoadingMore = () => {
+        if (page * 9 >= movies.length) {
+            setPage(1);
+            setLoading(false);
+            return;
         }
-        setPage(page+maxPage)
-        setLoading(false)
-    }
+        setPage(page + maxPage);
+        setLoading(false);
+    };
+
     useEffect(() => {
         async function moviesList() {
-           const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=371aafbf`)
-           const jsonData = await data.json()
-           setMovies([ ...AllMovies,jsonData]);
-           setLoading(false)
-           //added few movies because api conations only one movie object
-       }
-       moviesList();
-   }, [])
+            const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${apiKey}`);
+            const jsonData = await data.json();
+            setMovies([...AllMovies, jsonData]);
+            setLoading(false);
+        }
+        moviesList();
+    }, [apiKey]);
 
-   const filteredMovies = searchMovies 
-   ? movies.filter(movie =>{
-    return(
-       movie.Title.toLowerCase().includes(searchMovies.toLowerCase()) || movie.Year==searchMovies || movie.Genre.toLowerCase().includes(searchMovies.toLowerCase())
-    )
-   }
-   )
-   : movies;
-    
+    const filteredMovies = searchMovies
+        ? movies.filter(movie => {
+              return (
+                  movie.Title.toLowerCase().includes(searchMovies.toLowerCase()) ||
+                  movie.Year == searchMovies ||
+                  movie.Genre.toLowerCase().includes(searchMovies.toLowerCase())
+              );
+          })
+        : movies;
 
-  return (
-   <movieCon.Provider value={{setSearchMovies,searchMovies,HandleLoadingMore,page,setPage,setLoading,loading,setMovies,movies,filteredMovies,userLoggedIn,setUserLoggedIn,setWatchListMovies,watchListMovies}} >
-    {children}
-   </movieCon.Provider>
-  )
+    return (
+        <movieCon.Provider
+            value={{
+                setSearchMovies,
+                searchMovies,
+                HandleLoadingMore,
+                page,
+                setPage,
+                setLoading,
+                loading,
+                setMovies,
+                movies,
+                filteredMovies,
+                userLoggedIn,
+                setUserLoggedIn,
+                setWatchListMovies,
+                watchListMovies,
+            }}
+        >
+            {children}
+        </movieCon.Provider>
+    );
 }
 
 export const movieContext = () => {
-  return useContext(movieCon)
-}
-
+    return useContext(movieCon);
+};
 
 export default MovieContexApi;
