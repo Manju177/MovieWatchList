@@ -4,7 +4,7 @@ import { movieContext } from './MovieContexApi';
 
 function Movies({ movie, watchList }) {
   const { filteredMovies,setWatchListMovies } = movieContext();
-
+  
   const handleWatchList = (favMovie) => {
     // Retrieve user email from localStorage
     const userEmail = localStorage.getItem('loggedInUser');

@@ -15,16 +15,13 @@ function Login() {
     setEmail(e.target.value)
   }
   const handleLogin = (user) => {
-    // Set logged-in user
     if(user){
     localStorage.setItem('loggedInUser', user);
     setUserLoggedIn(true)
-    navigate('/watchlist')
-    // Retrieve watchlist data for the logged-in user
+    navigate('/movies')
     const storedWatchlist = localStorage.getItem(`watchlist_${user}`);
     if (storedWatchlist) {
       setWatchlist(JSON.parse(storedWatchlist));
-     
     }
   }else{
     localStorage.removeItem('loggedInUser');
@@ -57,6 +54,7 @@ function Login() {
                className='bg-red-900 flex items-center w-32 transistions hover:bg-blue-950 flex-rows gap-2 text-white p-3 rounded-lg '
                >
                 <CiLogin/> <button onClick={() => handleLogin(email)} >Login</button>
+ 
               </div>
           </div>
         </div>
