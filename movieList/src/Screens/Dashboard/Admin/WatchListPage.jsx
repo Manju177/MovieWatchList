@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
-import MoviesList from '../../../Components/MoviesList';
 import { FaCircleUser } from "react-icons/fa6";
 import MoviesWatchList from './MoviesWatchList';
 import { movieContext } from '../../../Components/MovieContexApi';
@@ -50,7 +49,7 @@ const WatchListPage = () => {
                     <h2 className='text-xl font-bold whitespace-nowrap'>My List 
                     </h2>
                     <marquee width="50%" direction="left">Lights, Camera, Action! Let the Show Begin</marquee>
-                     <button className='bg-slate-950 text-white border-red-900 font-medium transitions hover:bg-red-900 border border-red-950 text-black py-3 px-6 rounded flex justify-between gap-2 items-center'><FaCircleUser /> <span>{userEmail}</span></button>
+                     <button className='bg-slate-950 text-white border-red-900 font-medium transitions hover:bg-red-900 border border-red-950 text-white py-3 px-6 rounded flex justify-between gap-2 items-center'><FaCircleUser /> <span>{userEmail}</span></button>
                      
                 </div>
                 <MoviesWatchList/>

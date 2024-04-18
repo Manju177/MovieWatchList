@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { movieContext } from './MovieContexApi';
 
 function Movies({ movie, watchList }) {
   const { filteredMovies,setWatchListMovies } = movieContext();
+  const [add,setAdd]=useState('Add to WatchList')
   
   const handleWatchList = (favMovie) => {
     // Retrieve user email from localStorage
@@ -25,6 +26,7 @@ function Movies({ movie, watchList }) {
         // Update watchlist data in localStorage for the current user
         localStorage.setItem(`watchList_${userEmail}`, JSON.stringify(updatedWatchList));
         setWatchListMovies(updatedWatchList)
+        setAdd('Added')
     
       }
     } else {
@@ -43,10 +45,12 @@ function Movies({ movie, watchList }) {
         <h4 className='text-sm text-red-700 font-serif text-right text-neutral-950'>Rating: {movie?.imdbRating}</h4>
         <h3 className='font-bold font-serif text-center text-neutral-950'>{movie?.Title} ({movie?.Year})</h3>
         <button
+          
           className='h-9 w-full bg-red-900 text-sm item-center flex-colo transition hover:bg-red-600 border-2 rounded-md text-white'
           onClick={() => handleWatchList(movie?.Title)} 
+          // disabled={true}
         >
-          {watchList ? 'Remove from WatchList' : 'Add to WatchList'}
+          {watchList ? 'Remove from WatchList' : add}
         </button>
       </div>
     </div>

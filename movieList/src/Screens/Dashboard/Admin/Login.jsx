@@ -35,7 +35,7 @@ function Login() {
   }
 };
   return (
-    <Layout>
+    <Layout loginPage={true}>
       <ToastContainer /> 
         <div className='container flex items-center mx-auto px-2 my-24 flex-col'>
           <div className='w-full flex flex-col gap-2 align-center 2xl:w-2/5 flex-col p-14 md:w-3/4 bg-blue-950 rounded-lg border-border'>

@@ -4,7 +4,7 @@ import { FaSearch, FaHeart } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import { movieContext } from '../../Components/MovieContexApi';
 
-function NavaBar() {
+function NavaBar({loginPage}) {
     const { setSearchMovies, searchMovies, userLoggedIn } = movieContext()
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate()
@@ -46,7 +46,9 @@ function NavaBar() {
                                 className='w-full h-12 object-contain' />
                         </Link>
                     </div>
+
                     <div className='col-span-3 '>
+                    {!loginPage&&
                         <form className='w-full text-sm bg-stone-300 rounded-lg flex flex-nowrap gap-14'>
                             <button type="submit" className='bg-red-800 w-12 flex-col h-12 rounded text-white flex justify-center items-center'>
                                 <FaSearch />
@@ -54,6 +56,7 @@ function NavaBar() {
                             <input type='text' placeholder='Search Movie Name from here' className='font-medium placeholder:text-border outline-none text-sm w-11/12 h-12 bg-transparent border-none px-2 text-black' value={searchMovies}
                                 onChange={handleSearchInputChange} />
                         </form>
+                    }
                     </div>
                     <div className='col-span-3 gap-14 font-medium text-sm hidden xl:gap-14 2xl:gap-20 flex justify-end lg:flex justify-end xl:flex justify-end items-center'>
                         <NavLink to="/movies" className={ActiveCheck}>

@@ -24,12 +24,15 @@ function MoviesWatchList() {
         <>
             {loading && <AiOutlineLoading3Quarters className='w-10 h-10 animate-spin ' />}
             <div className='my-16'>
-                <p className='text-lg font-medium my-6'>
-                    Total <span className='font-bold text-red-600 '>{filteredWatchListMovies?.length}</span> Items Found
+                    <p className='text-lg font-medium my-6'>
+                    Total <span className='font-bold text-red-600 '>{filteredWatchListMovies?filteredWatchListMovies.length:0}</span> Items Found
+                    </p>
+                    {!filteredWatchListMovies&&<img src='/noItems.jpg' alt='NO ITEMS FOUND' style={{ width: "-webkit-fill-available" }} />}
+                    <p className='text-lg font-medium my-6'>
                     {
                         filteredWatchListMovies?.length <= 0 && <img src='/noItems.jpg' alt='NO ITEMS FOUND' style={{ width: "-webkit-fill-available" }} />
                     }
-                </p>
+                    </p>
                 <div className='grid sm:mt-12 mt-6 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10'>
                     {
                         filteredWatchListMovies?.slice(page * 9 - 9, page * 9).map((movie, index) => {
