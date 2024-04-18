@@ -24,6 +24,8 @@ function MovieContexApi({ children }) {
     };
 
     useEffect(() => {
+        try {
+            
         async function moviesList() {
             const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${apikey}`);
             const jsonData = await data.json();
@@ -31,6 +33,13 @@ function MovieContexApi({ children }) {
             setLoading(false);
         }
         moviesList();
+            
+        } catch (error) {
+            //this is added becuse failing with cross-origin error 
+            setMovies([...AllMovies]);
+            setLoading(false);
+            
+        }
     }, []);
 
     const filteredMovies = searchMovies
