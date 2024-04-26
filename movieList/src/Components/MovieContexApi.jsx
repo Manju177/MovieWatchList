@@ -13,6 +13,8 @@ function MovieContexApi({ children }) {
     const maxPage = 1;
     const [page, setPage] = useState(maxPage);
 
+    const url=`http://www.omdbapi.com/?i=tt3896198&apikey=${apikey}`
+
     const HandleLoadingMore = () => {
         if (page * 9 >= movies.length) {
             setPage(1);
@@ -27,7 +29,7 @@ function MovieContexApi({ children }) {
         try {
             
         async function moviesList() {
-            const data = await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=${apikey}`);
+            const data = await fetch(url);
             const jsonData = await data.json();
             setMovies([...AllMovies, jsonData]);
             setLoading(false);
