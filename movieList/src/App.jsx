@@ -16,8 +16,8 @@ function App() {
           <Route path="/movies" element={<HomeScreen />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
-          ({userEmail&&
-          <Route path="/watchList" element={<WatchListPage/> }/>})
+       
+          <Route path="/watchList" element={<WatchListPage/> }/>
           <Route path="*" element={<HomeScreen />} />
           {/* <Route path={"/movie/:id"||"/watchList/movie/:id"||"/movies/movie/:id"} element={<WatchMovie />} /> */}
           <Route path="/movie/:id" element={<WatchMovie />} />
